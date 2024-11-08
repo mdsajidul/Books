@@ -1,0 +1,202 @@
+/* basic-computer.css */
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(to right, #0a0a0a, #333333);
+    color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #222;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3); /* Optional: shadow for depth */
+    transition: all 0.3s ease; /* Optional: smooth transition for sidebar */
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+    /* Sidebar heading styling */
+    .sidebar h2 {
+        margin-bottom: 20px;
+        color: #d4af37;
+        font-weight: 700; /* Optional: bold for emphasis */
+        font-family: 'Georgia', serif; /* Optional: serif for classic feel */
+    }
+
+    .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar li {
+        margin: 10px 0;
+    }
+
+    .sidebar a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        background-color: #444;
+        color: #f5f5f5;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+        width: 100%;
+        height: 50px;
+        box-sizing: border-box;
+    }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        /* Hover effect for active button */
+        .sidebar a.active,
+        .sidebar a.active:hover {
+            background-color: #d4af37; /* Maintain hover effect color */
+            color: #222; /* Maintain hover text color */
+        }
+
+        .sidebar a:hover {
+            background-color: #555; /* Change background color on hover for non-active buttons */
+        }
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+    /* Add spacing between paragraphs */
+    .content p {
+        margin-bottom: 20px; /* Space below each paragraph */
+    }
+
+    /* Add spacing between list items */
+    .content ol,
+    .content ul {
+        margin-bottom: 20px; /* Space below each list */
+    }
+
+        /* Add space between items in ordered lists */
+        .content ol li {
+            margin-bottom: 10px; /* Space below each list item */
+        }
+
+        /* Add space between items in unordered lists */
+        .content ul li {
+            margin-bottom: 10px; /* Space below each list item */
+        }
+
+/* Custom Scrollbar Styles for WebKit Browsers */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #222;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #d4af37;
+    }
+
+/* Menu Icon for Mobile */
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-bottom: 20px; /* Space below the menu icon */
+}
+
+.line {
+    height: 4px; /* Thickness of the lines */
+    width: 30px; /* Length of the lines */
+    background-color: #d4af37; /* Line color */
+    margin: 3px 0; /* Space between lines */
+}
+
+/* Hide sidebar styles */
+.sidebar.hidden {
+    display: none; /* Hide the sidebar when this class is added */
+}
+
+/* Back to Top Button */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Initially hidden */
+    padding: 10px 15px;
+    background-color: #d4af37;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+    /* Optional: Add hover effect for back to top button */
+    #backToTop:hover {
+        transform: scale(1.1); /* Slight enlargement on hover */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    }
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* Stack sidebar and content vertically */
+    }
+
+    .sidebar {
+        width: 100%; /* Full width on small screens */
+        height: auto; /* Let height adjust according to content */
+    }
+
+    .content {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .sidebar h2 {
+        font-size: 20px; /* Adjust heading size */
+    }
+
+    .sidebar a {
+        height: auto; /* Auto height for buttons */
+        padding: 10px; /* Reduce padding */
+        font-size: 14px; /* Smaller font size for buttons on mobile */
+        line-height: 1.5; /* Add line-height for better text spacing */
+    }
+}
+
+/* For very small devices, like phones */
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 10px; /* Adjust padding for sidebar */
+    }
+
+    .menu-icon {
+        margin-bottom: 10px; /* Adjust space for menu icon */
+    }
+
+    .line {
+        width: 25px; /* Smaller lines for mobile */
+    }
+
+    #backToTop {
+        padding: 8px 12px; /* Smaller button size */
+        font-size: 14px; /* Smaller font size for back to top button */
+    }
+}
