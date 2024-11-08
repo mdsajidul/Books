@@ -1003,42 +1003,41 @@ chapter39:
 
 // Function to show content based on chapter selection
 function showContent(chapter) {
-    // Update content
+    // Update content area
     document.getElementById('text-sample').innerHTML = content[chapter] || "যেকোনো একটা অধ্যায়ে ক্লিক করুন।";
 
     // Update active class on sidebar links
     const links = document.querySelectorAll('.sidebar a');
-    links.forEach(link => {
-        link.classList.remove('active'); // Remove active class from all links
-    });
+    links.forEach(link => link.classList.remove('active')); // Remove active class from all links
 
     // Add active class to the clicked link
     const activeLink = Array.from(links).find(link => link.getAttribute('onclick').includes(chapter));
     if (activeLink) {
         activeLink.classList.add('active'); // Add active class to the clicked link
     }
+
+    // Hide sidebar after clicking a chapter link
+    document.querySelector('.sidebar').classList.add('hidden'); // Use a class to hide the sidebar
 }
 
-// Function to toggle sidebar visibility
+// Function to toggle sidebar visibility when 3-line icon is clicked
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
-    const button = document.getElementById('toggleSidebar');
-
-    // Toggle visibility and button text
-    if (sidebar.style.display === 'none' || sidebar.style.display === '') {
-        sidebar.style.display = 'block';  // Show sidebar
-        button.textContent = 'Hide Sidebar';  // Change button text
-    } else {
-        sidebar.style.display = 'none';  // Hide sidebar
-        button.textContent = 'Show Sidebar';  // Change button text
-    }
+    sidebar.classList.toggle('hidden'); // Toggle the 'hidden' class
 }
 
 // Initialize the page with the first chapter
 document.addEventListener('DOMContentLoaded', () => {
-    showContent('chapter'); // Load initial chapter content
-    document.querySelector('.sidebar').style.display = 'block'; // Ensure sidebar is visible initially
+    showContent('chapter1'); // Load initial chapter content
+    document.querySelector('.sidebar').classList.remove('hidden'); // Ensure sidebar is visible initially
 });
 
-// Attach event listener to the toggle button
-document.getElementById('toggleSidebar').addEventListener('click', toggleSidebar);
+// Attach event listener to the 3-line menu icon
+document.querySelector('.menu-icon').addEventListener('click', toggleSidebar);
+
+
+// Function to toggle sidebar visibility when 3-line menu icon is clicked
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('hidden'); // Toggle the 'hidden' class to show/hide the sidebar
+}
