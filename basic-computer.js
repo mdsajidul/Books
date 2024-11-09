@@ -1003,41 +1003,40 @@ chapter39:
 
 // Function to show content based on chapter selection
 function showContent(chapter) {
-    // Update content area
     document.getElementById('text-sample').innerHTML = content[chapter] || "যেকোনো একটা অধ্যায়ে ক্লিক করুন।";
 
     // Update active class on sidebar links
-    const links = document.querySelectorAll('.sidebar a');
-    links.forEach(link => link.classList.remove('active')); // Remove active class from all links
+    document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
 
     // Add active class to the clicked link
-    const activeLink = Array.from(links).find(link => link.getAttribute('onclick').includes(chapter));
-    if (activeLink) {
-        activeLink.classList.add('active'); // Add active class to the clicked link
+    const activeLink = Array.from(document.querySelectorAll('.sidebar a')).find(link =>
+        link.getAttribute('onclick').includes(chapter)
+    );
+    if (activeLink) activeLink.classList.add('active');
+
+    // Hide sidebar and show the "Show Sidebar" button on smaller screens
+    document.querySelector('.sidebar').classList.add('hidden');
+    document.getElementById('showSidebarButton').style.display = 'block';
+}
+
+// Function to toggle sidebar visibility
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const showSidebarButton = document.getElementById('showSidebarButton');
+
+    // Toggle sidebar visibility and button
+    if (sidebar.classList.contains('hidden')) {
+        sidebar.classList.remove('hidden');
+        showSidebarButton.style.display = 'none';  // Hide the button when sidebar is visible
+    } else {
+        sidebar.classList.add('hidden');
+        showSidebarButton.style.display = 'block';  // Show the button when sidebar is hidden
     }
-
-    // Hide sidebar after clicking a chapter link
-    document.querySelector('.sidebar').classList.add('hidden'); // Use a class to hide the sidebar
 }
 
-// Function to toggle sidebar visibility when 3-line icon is clicked
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('hidden'); // Toggle the 'hidden' class
-}
-
-// Initialize the page with the first chapter
+// Initialize the page with the first chapter and ensure sidebar is visible
 document.addEventListener('DOMContentLoaded', () => {
-    showContent('chapter1'); // Load initial chapter content
-    document.querySelector('.sidebar').classList.remove('hidden'); // Ensure sidebar is visible initially
+    showContent('chapter1');
+    document.querySelector('.sidebar').classList.remove('hidden');
+    document.getElementById('showSidebarButton').style.display = 'none'; // Initially hide the button
 });
-
-// Attach event listener to the 3-line menu icon
-document.querySelector('.menu-icon').addEventListener('click', toggleSidebar);
-
-
-// Function to toggle sidebar visibility when 3-line menu icon is clicked
-function toggleSidebar() {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('hidden'); // Toggle the 'hidden' class to show/hide the sidebar
-}
