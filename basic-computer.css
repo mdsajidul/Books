@@ -8,6 +8,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Sidebar Styles */
@@ -19,6 +20,7 @@ body {
     transition: all 0.3s ease;
     height: 100vh;
     overflow-y: auto;
+    display: block; /* Ensure it's visible by default */
 }
 
     .sidebar h2 {
@@ -181,3 +183,38 @@ body {
         .content ul li {
             margin-bottom: 10px;
         }
+
+/* Responsive Styles for Mobile */
+@media screen and (max-width: 768px) {
+    /* Sidebar hides on mobile by default */
+    .sidebar {
+        display: inline;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        z-index: 1000;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Show Sidebar Button visible on mobile */
+    #showSidebarButton {
+        display: block;
+    }
+
+    /* Mobile Menu Icon */
+    .menu-icon {
+        display: flex;
+    }
+
+    /* Adjust content to take full width when sidebar is hidden */
+    .content {
+        margin-left: 0;
+    }
+
+    /* Hide Back to Top Button on mobile for better usability */
+    #backToTop {
+        display: none;
+    }
+}
