@@ -1,13 +1,16 @@
-/* basic-computer.css */
-
+/* General Styles */
 body {
     display: flex;
+    flex-direction: row;
     min-height: 100vh;
     background: linear-gradient(to right, #0a0a0a, #333333);
     color: #f5f5f5;
     font-family: Arial, sans-serif;
+    margin: 0;
+    box-sizing: border-box;
 }
 
+/* Sidebar Styles */
 .sidebar {
     width: 250px;
     background-color: #222;
@@ -18,12 +21,12 @@ body {
     overflow-y: auto;
 }
 
-    /* Sidebar heading styling */
     .sidebar h2 {
         margin-bottom: 20px;
         color: #d4af37;
         font-weight: 700;
         font-family: 'Georgia', serif;
+        font-size: 1.5em;
     }
 
     .sidebar ul {
@@ -40,7 +43,7 @@ body {
     .sidebar a {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         padding: 15px;
         background-color: #444;
         color: #f5f5f5;
@@ -48,7 +51,6 @@ body {
         border-radius: 5px;
         transition: background-color 0.3s, color 0.3s;
         width: 100%;
-        height: 50px;
         box-sizing: border-box;
     }
 
@@ -56,7 +58,6 @@ body {
             margin-right: 10px;
         }
 
-        /* Hover effect for active button */
         .sidebar a.active,
         .sidebar a.active:hover {
             background-color: #d4af37;
@@ -67,15 +68,14 @@ body {
             background-color: #555;
         }
 
+/* Main Content Area */
 .content {
     flex: 1;
     padding: 20px;
+    margin-top: 20px; /* Adjust to ensure content doesn't overlap with the sidebar */
 }
 
-    .content p {
-        margin-bottom: 20px;
-    }
-
+    .content p,
     .content ol,
     .content ul {
         margin-bottom: 20px;
@@ -86,7 +86,7 @@ body {
             margin-bottom: 10px;
         }
 
-/* Custom Scrollbar Styles for WebKit Browsers */
+/* Scrollbar Styles */
 ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
@@ -106,9 +106,9 @@ body {
         background: #d4af37;
     }
 
-/* Menu Icon for Mobile */
+/* Mobile Menu Icon */
 .menu-icon {
-    display: flex;
+    display: none;
     flex-direction: column;
     cursor: pointer;
     margin-bottom: 20px;
@@ -121,7 +121,7 @@ body {
     margin: 3px 0;
 }
 
-/* Hide sidebar styles */
+/* Sidebar Hide Style */
 .sidebar.hidden {
     display: none;
 }
@@ -146,8 +146,44 @@ body {
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
 
+/* Sidebar and Show Sidebar Button */
+#showSidebarButton {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    padding: 10px 15px;
+    background-color: #d4af37;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 10; /* Ensure it is above other elements */
+    display: none; /* Initially hidden */
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-top: 40px; /* Add margin-top to move content lower */
+}
+
+    .content p {
+        margin-bottom: 20px;
+    }
+
+    .content ol,
+    .content ul {
+        margin-bottom: 20px;
+    }
+
+        .content ol li,
+        .content ul li {
+            margin-bottom: 10px;
+        }
+
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     body {
         flex-direction: column;
     }
@@ -155,6 +191,10 @@ body {
     .sidebar {
         width: 100%;
         height: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9; /* Make sure sidebar is above content */
     }
 
     .content {
@@ -171,16 +211,32 @@ body {
         font-size: 14px;
         line-height: 1.5;
     }
+
+    /* Show Menu Icon on smaller screens */
+    .menu-icon {
+        display: flex;
+    }
+
+    /* Adjust Sidebar visibility button */
+    #showSidebarButton {
+        display: block;
+    }
+
+    /* Hide the sidebar by default when screen is small */
+    .sidebar.hidden {
+        display: block;
+        width: 100%;
+        background-color: #222;
+    }
+
+    /* Back to Top Button */
+    #backToTop {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
 }
 
-/* Add this class to hide the sidebar */
-.sidebar.hidden {
-    display: none;
-}
-
-
-
-/* For very small devices, like phones */
+/* Very Small Devices (Phones) */
 @media (max-width: 480px) {
     .sidebar {
         padding: 10px;
