@@ -1003,6 +1003,7 @@ chapter39:
 
 // Function to show content based on chapter selection
 function showContent(chapter) {
+    // Set the content for the selected chapter
     document.getElementById('text-sample').innerHTML = content[chapter] || "যেকোনো একটা অধ্যায়ে ক্লিক করুন।";
 
     // Update active class on sidebar links
@@ -1014,23 +1015,22 @@ function showContent(chapter) {
     );
     if (activeLink) activeLink.classList.add('active');
 
-    // Hide sidebar and show the "Show Sidebar" button on smaller screens
+    // Hide the sidebar on chapter click (for both mobile and desktop)
     document.querySelector('.sidebar').classList.add('hidden');
-    document.getElementById('showSidebarButton').style.display = 'block';
+    document.getElementById('showSidebarButton').style.display = 'block'; // Show the button when sidebar is hidden
 }
 
-// Function to toggle sidebar visibility
+// Function to toggle sidebar visibility (only triggered by the "Show Sidebar" button)
 function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     const showSidebarButton = document.getElementById('showSidebarButton');
 
-    // Toggle sidebar visibility and button
+    // Toggle sidebar visibility and button only when "Show Sidebar" button is clicked
     if (sidebar.classList.contains('hidden')) {
         sidebar.classList.remove('hidden');
         showSidebarButton.style.display = 'none';  // Hide the button when sidebar is visible
     } else {
-        sidebar.classList.add('hidden');
-        showSidebarButton.style.display = 'block';  // Show the button when sidebar is hidden
+        // Do nothing when sidebar is already visible, to avoid unintended hiding of sidebar
     }
 }
 
@@ -1039,4 +1039,16 @@ document.addEventListener('DOMContentLoaded', () => {
     showContent('chapter1');
     document.querySelector('.sidebar').classList.remove('hidden');
     document.getElementById('showSidebarButton').style.display = 'none'; // Initially hide the button
+
+    // Add event listener for the "Show Sidebar" button
+    document.getElementById('showSidebarButton').addEventListener('click', toggleSidebar);
+
+    // Add event listeners to all chapter buttons to hide the sidebar
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.addEventListener('click', () => {
+            // Hide sidebar and show the "Show Sidebar" button
+            document.querySelector('.sidebar').classList.add('hidden');
+            document.getElementById('showSidebarButton').style.display = 'block';
+        });
+    });
 });
